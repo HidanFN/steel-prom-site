@@ -1,0 +1,31 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgb(13 39 68 / 62%);
+  z-index: 80;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+}
+
+.dialog {
+  background: #fff;
+  width: min(560px, 100%);
+  max-height: min(92vh, 840px);
+  overflow: auto;
+  padding: 28px 26px 22px;
+  position: relative;
+  border: 1px solid var(--line);
+}
+
+.close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  min-height: 44px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  background: #fff;
+  cursor: pointer;
+  font-weight: 600;
+}

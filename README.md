@@ -1,36 +1,87 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Сайт ООО «СтальПром»
 
-## Getting Started
+Новая версия корпоративного сайта: спокойный промышленный визуал, крупная типографика для аудитории 40+, без багов старого steel-prom.ru.
 
-First, run the development server:
+Стек: **Next.js 15 (App Router) + TypeScript + CSS Modules**.
+
+## Запуск
+
+Нужны Node.js 20+ и npm.
 
 ```bash
+cd steel-prom-site
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Откройте http://localhost:3000
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Сборка для хостинга:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm start
+```
 
-## Learn More
+Статический хостинг (Nginx, Timeweb, Beget): после `npm run build` можно отдать папку `.next` через Node (`npm start`) или настроить деплой на Vercel / хостинг с поддержкой Next.js.
 
-To learn more about Next.js, take a look at the following resources:
+## Что уже исправлено относительно старого сайта
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Ссылки на политику и соглашение: `/privacy-policy/` и `/user-agreement/` (не `//privacy-policy/`).
+- Уникальные `id` полей в каждой форме (`formId` + имя поля).
+- Телефон: `type="tel"` и маска `+7 (___) ___-__-__`.
+- `tel:+78007003456` и `tel:+73479241900` без пробелов в `href`.
+- `target="_blank"` + `rel="noopener noreferrer"` у MAX.
+- Один набор фактов о компании в `content/company.ts` — нет расхождений 2000/2002 и «8/9 филиалов» на разных страницах.
+- Hero без автослайдера.
+- Нет CSS `zoom`.
+- Базовый шрифт 18px, кнопки от 48px.
+- Open Graph в `app/layout.tsx`, JSON-LD Organization.
+- Картинки через `next/image` (WebP на лету).
+- Cookie-баннер не ломает вёрстку.
+- Поиск по разделам и товарам, без битых `//directions/…`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Контент — один источник правды
 
-## Deploy on Vercel
+| Файл | Что внутри |
+|------|------------|
+| `content/company.ts` | Реквизиты связи, год, цифры, цеха |
+| `content/branches.ts` | Филиалы |
+| `content/catalog.ts` | Категории, подкатегории, товары |
+| `content/directions.ts` | Направления |
+| `content/portfolio.ts` | Проекты |
+| `content/news.ts` | Новости и статьи |
+| `content/pages.ts` | Вакансии, награды, галерея, поставщикам |
+| `content/navigation.ts` | Меню |
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Цены на сайте не выдуманы: везде «Цена предоставляется по запросу» + кнопка расчёта.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Что уточнить у заказчика перед продакшеном
+
+1. **Год основания** — в этом проекте стоит **2000** (как в футере старого сайта). На странице «О компании» у них также был 2002.
+2. **Площадь** — стоит **15 га**. На старой странице компании было 11 000 м².
+3. **Адреса филиалов** кроме Белорецка (ул. Блюхера, 139) — на старом сайте в селекторе города без точных улиц.
+4. **ИНН, ОГРН, расчётный счёт** — для карточки предприятия и юр. страниц.
+5. **Прайс PDF** — положить в `public/price.pdf` и повесить ссылку в каталоге.
+6. **Реальные фото и полная номенклатура** — сейчас демо по структуре старого каталога, часть фото с `steel-prom.ru`.
+7. **SMTP / CRM** для заявок — сейчас `POST /api/inquiry/` только пишет заявку в лог сервера.
+8. **Ключ SmartCaptcha** — слот в форме уже есть (`data-captcha-slot`).
+9. **Ключ Яндекс.Карт** — на контактах заглушка; не публикуйте ключ с `mode=debug`, ограничьте HTTP Referer.
+10. Юридические тексты политики и соглашения.
+
+## Как подключить почту заявок
+
+Файл: `app/api/inquiry/route.ts`.
+
+Вместо `console.info` отправьте письмо (Nodemailer, Resend, корпоративный SMTP) или webhook в Bitrix24 / AmoCRM. Поля: `fio`, `phone`, `company`, `email`, `branch`, `product`, `comment`.
+
+## Фото
+
+`next.config.ts` разрешает загрузку с `steel-prom.ru`. Перед своим CDN замените URL в `content/*` или сложите файлы в `public/images/`.
+
+## Аудитория 40+
+
+- Крупный текст, высокий контраст, синий бренд `#0057B8`.
+- Телефоны в шапке всегда кликабельны.
+- Меню из 5 пунктов, подпункты крупными строками.
+- Форма рядом с телефоном, без капчи-стены до появления ключа.
