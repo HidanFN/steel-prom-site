@@ -20,8 +20,8 @@ export default function VacancyPage() {
       <section className="section">
         <div className="container">
           {vacancies.map((v) => (
-            <article key={v.title} className="card" style={{ marginBottom: 18 }}>
-              <div className="card-body">
+            <article key={v.title} className="panel" style={{ marginBottom: 18 }}>
+              <div className="panel-body">
                 <h2>{v.title}</h2>
                 <p>{v.city}</p>
                 <p>{v.text}</p>

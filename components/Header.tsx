@@ -14,6 +14,16 @@ export function Header() {
 
   return (
     <header className={styles.header}>
+      <div className={styles.bar}>
+        <div className={`container ${styles.barInner}`}>
+          <span>{company.hq.city}</span>
+          <a href={`mailto:${company.email}`}>{company.email}</a>
+          <span>Пн–пт</span>
+          <Link href="/search/" className={styles.barSearch}>
+            Поиск
+          </Link>
+        </div>
+      </div>
       <div className={styles.top}>
         <div className={`container ${styles.topInner}`}>
           <Logo />
@@ -27,11 +37,11 @@ export function Header() {
               <small>{company.phones.general.label}</small>
             </a>
           </div>
+          <a href={company.phones.sales.href} className={styles.mobilePhone}>
+            {company.phones.sales.display}
+          </a>
           <div className={styles.actions}>
-            <Link href="/search/" className={styles.search} aria-label="Поиск по сайту">
-              Поиск
-            </Link>
-            <button type="button" className="btn" onClick={() => setModal(true)}>
+            <button type="button" className="btn btn-accent" onClick={() => setModal(true)}>
               Отправить запрос
             </button>
           </div>
@@ -53,7 +63,18 @@ export function Header() {
               <span>{company.phones.sales.display}</span>
               <small>{company.phones.sales.label}</small>
             </a>
-            <button type="button" className="btn" onClick={() => { setOpen(false); setModal(true); }}>
+            <a href={company.phones.general.href} className={styles.phone}>
+              <span>{company.phones.general.display}</span>
+              <small>{company.phones.general.label}</small>
+            </a>
+            <button
+              type="button"
+              className="btn btn-accent"
+              onClick={() => {
+                setOpen(false);
+                setModal(true);
+              }}
+            >
               Отправить запрос
             </button>
           </div>
@@ -64,6 +85,7 @@ export function Header() {
               </Link>
               {item.children && (
                 <div className={styles.sub}>
+                  <p className={styles.subTitle}>{item.label}</p>
                   {item.children.map((child) => (
                     <Link key={child.href} href={child.href} onClick={() => setOpen(false)}>
                       {child.label}

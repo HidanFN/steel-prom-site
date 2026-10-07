@@ -27,9 +27,9 @@ export default function PortfolioPage() {
               </div>
               <div className="card-body">
                 <h2>{p.title}</h2>
-                <p>
+                <span className="card-meta">
                   {p.date} · {p.industry}
-                </p>
+                </span>
               </div>
             </Link>
           ))}

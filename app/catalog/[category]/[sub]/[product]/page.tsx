@@ -49,7 +49,7 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
       <section className="section">
         <div className="container split">
           <div>
-            <div className="card-img" style={{ aspectRatio: "16/10", position: "relative" }}>
+            <div className="card-img panel" style={{ aspectRatio: "16/10", position: "relative" }}>
               <RemoteImage src={item.image} alt={item.title} fill sizes="700px" />
             </div>
             <h2 style={{ marginTop: 28 }}>Описание</h2>
@@ -64,8 +64,8 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
               </ul>
             )}
           </div>
-          <aside className="card" style={{ alignSelf: "start" }}>
-            <div className="card-body">
+          <aside className="panel" style={{ alignSelf: "start" }}>
+            <div className="panel-body">
               <p className="price">{PRICE_ON_REQUEST}</p>
               <p>Сообщите длину, грузоподъёмность и стандарт — подготовим расчёт.</p>
               <RequestButton formId={`prod-${item.slug}`} product={item.title}>

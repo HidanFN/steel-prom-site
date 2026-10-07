@@ -26,7 +26,6 @@ export default function DirectionsPage() {
               </div>
               <div className="card-body">
                 <h2>{d.title}</h2>
-                <p>{d.lead}</p>
               </div>
             </Link>
           ))}

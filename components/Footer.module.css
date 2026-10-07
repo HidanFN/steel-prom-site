@@ -1,8 +1,9 @@
 .footer {
-  background: #0d2744;
+  background: #07192d;
   color: #d7e3f0;
-  padding: 48px 0 24px;
-  margin-top: 40px;
+  padding: 52px 0 24px;
+  margin-top: 0;
+  border-top: 4px solid var(--accent);
 }
 
 .footer a {
@@ -23,6 +24,14 @@
 
 .about {
   max-width: 28em;
+}
+
+.phones {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.45;
 }
 
 .heading {

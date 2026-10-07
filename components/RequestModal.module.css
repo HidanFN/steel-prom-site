@@ -15,7 +15,8 @@
   overflow: auto;
   padding: 28px 26px 22px;
   position: relative;
-  border: 1px solid var(--line);
+  border-top: 4px solid var(--accent);
+  box-shadow: var(--shadow-hover);
 }
 
 .close {

@@ -17,7 +17,7 @@ export function RequestButton({
   light?: boolean;
 }) {
   const [open, setOpen] = useState(false);
-  const cls = light ? "btn btn-light" : outline ? "btn btn-outline" : "btn";
+  const cls = light ? "btn btn-light" : outline ? "btn btn-outline" : "btn btn-accent";
   return (
     <>
       <button type="button" className={cls} onClick={() => setOpen(true)}>

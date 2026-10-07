@@ -17,11 +17,12 @@ export function Footer() {
           <p>
             {company.hq.city}, {company.hq.address}
           </p>
-          <p>
+          <p className={styles.phones}>
             <a href={company.phones.sales.href}>{company.phones.sales.display}</a>
             <br />
             <a href={company.phones.general.href}>{company.phones.general.display}</a>
-            <br />
+          </p>
+          <p>
             <a href={`mailto:${company.email}`}>{company.email}</a>
           </p>
           <p>
